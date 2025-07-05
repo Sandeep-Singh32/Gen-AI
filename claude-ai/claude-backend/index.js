@@ -10,6 +10,16 @@ application.use(express.json());
 application.use(express.urlencoded({ extended: true }));
 
 application.use(cors({ origin: "*" }));
+
+application.use(
+  "/projects",
+  express.static(
+    "/Users/sandeepsingh/Documents/projects/gen-ai/claude-ai/claude-backend",
+    { index: "index.html" }
+    
+  )
+);
+
 application.use(router);
 
 router.get("/", (req, res) => {
@@ -22,7 +32,6 @@ router.post("/generate-content", async (req, res) => {
   try {
     const { body } = req;
     const response = await generateContent(body.message);
-    console.log("The response is -->", response);
     return res.json({
       status: "success",
       data: response,
@@ -41,7 +50,6 @@ function bootstrap() {
   });
 
   appData.timeout = 300000;
-
 }
 
 bootstrap();

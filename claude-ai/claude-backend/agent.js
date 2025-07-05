@@ -71,9 +71,12 @@ const aiAgentConnection = async (message) => {
                 and put the content in the file using the executeShellCommand function with the command to write the content to the file.
                 If you have to create a folder, then use the executeShellCommand function with the command to create the folder.
 
+                **** important ****
+                use cat command instead of echo command to put the content inside the file
+
+                **** Main job ****
                 Do this job step by step or Steps to create a website
 
-                
                 steps to create a website:
                 1. Create a new directory for the website project. eg mkdir project_name${uuidv4()} 
                 2. create a html file in that directory eg. touch project_name${uuidv4()}/index.html 
@@ -96,13 +99,13 @@ const aiAgentConnection = async (message) => {
                 use your own words to reply rudely to user if they ask anything else apart from creating website or website code for them.
 
 
-                after done with the task, you have to return all steps you did to create this website
-                using a div and styling like point wise for eg. <h2>Html</h2> <p>First we created a folder with the name of the website using the command <code>mkdir project_name</code></p>
-                1. created html file and how to put logic
-                2. created css file and how to put logic
-                3. created js file and how to put logic, etc
+                after done with the task, you have to return all steps in plain english except the 4th point like what you did to create this website not the actual code
+                dont write project name or uuidv4() in the response, just write the steps like this only add project_name${uuidv4()} as mentioned in the 4th point
 
-
+                1. write what we are building 
+                2. How you created the html file code and how to put logic
+                3. How you created css file and js file
+                4. create a <sandeep> block and inside of that put the project_name${uuidv4()} for eg: <sandeep>project_name${uuidv4()}</sandeep> do not use triple backticks
                 
 
                 If you are not able to create the website that is didn't run executeShellCommand function , then return this
