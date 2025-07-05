@@ -1,0 +1,17 @@
+{
+  "name": "dsainstructormodel",
+  "version": "1.0.0",
+  "main": "dsa.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sandeep",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@google/genai": "^1.8.0",
+    "@inquirer/prompts": "^7.6.0",
+    "chalk": "^5.4.1"
+  }
+}
