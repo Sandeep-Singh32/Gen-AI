@@ -2,7 +2,7 @@ import { input } from "@inquirer/prompts";
 import { GoogleGenAI, Type } from "@google/genai";
 import { exec } from "child_process";
 import { promisify } from "node:util";
-import os from 'os'
+import os from "os";
 
 const GEMINI_API_KEY = "AIzaSyBnAjkyoUB7EUh8u-nFkqAiVxwG8CpETNU";
 const platform = os.platform();
@@ -51,6 +51,7 @@ const availableTools = {
 const history = [];
 
 const aiAgent = async (message) => {
+  let aiAgentResponse = "Thanks You!";
   history.push({ role: "user", parts: [{ text: message }] });
 
   while (true) {
@@ -65,13 +66,8 @@ const aiAgent = async (message) => {
         and put the content in the file using the executeShellCommand function with the command to write the content to the file.
         If you have to create a folder, then use the executeShellCommand function with the command to create the folder.
 
-        Do this job step by step.
-        1. If user asks for any website
-        2. give them command one by one
-        3. use available tools to execute the command
+        Do this job step by step or Steps to create a website
 
-
-        Now you can start building the website.
         1. create a folder with the name of the website eg. mkdir calculator
         2. create an index.html file in the folder eg. touch calculator/index.html
         3. create a style.css file in the folder
@@ -82,6 +78,21 @@ const aiAgent = async (message) => {
 
 
         you have to provide the shell/terminal command to user, they will run and execute it
+
+        after done with the task, you have to return this message:
+        {
+          "message": "Task Completed Successfully",
+          "status": "success",
+          "hasCreatedWebsite": true // or false if not created
+          "folderName": "calculator" // the name of the folder you created
+        }
+
+        If you are not able to create the website that is didn't run executeShellCommand function , then return this message:
+        {
+          "message": "Sorry, I am unable to execute the command.",
+          "status": "error",
+          "hasCreatedWebsite": false
+        }
         `,
         tools: [
           {
@@ -130,14 +141,17 @@ const aiAgent = async (message) => {
         role: "model",
         parts: [{ text: result }],
       });
-      console.log(result);
+
+      aiAgentResponse = result;
       break;
     }
   }
+
+  console.log(aiAgentResponse);
+  return aiAgentResponse;
 };
 
 const main = async () => {
-  console.log("I am a cursor-ai agent. I can help you build websites step by step.");
   const result = await input({ message: "Ask me anything" });
   await aiAgent(result);
   main();
