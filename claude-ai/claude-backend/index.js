@@ -1,5 +1,6 @@
 import express, { Router } from "express";
 import { config } from "./config.js";
+import path from "path";
 import { generateContent } from "./agent.js";
 import cors from "cors";
 
@@ -13,11 +14,12 @@ application.use(cors({ origin: "*" }));
 
 application.use(
   "/projects",
-  express.static(
-    "/Users/sandeepsingh/Documents/projects/gen-ai/claude-ai/claude-backend",
-    { index: "index.html" }
-    
-  )
+  express.static(path.join(""), { index: "index.html" })
+);
+
+application.use(
+  "/projects/:projectName/code",
+  express.static(path.join(""), { index: "index.txt" })
 );
 
 application.use(router);
