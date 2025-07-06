@@ -8,7 +8,7 @@ type Message = {
   parts: { text: string; projectId: string; projectName: string }[];
 };
 
-const API_BASE_URL = "http://localhost:3000";
+const API_BASE_URL = "https://sandeep-website-generator.onrender.com";
 
 export default function Home() {
   const [messages, setMessages] = useState<Message[]>([
